@@ -15,6 +15,54 @@ For all exercises use [Queue class](https://github.com/codebasics/data-structure
     This problem is a producer,consumer problem where place_order thread is producing orders whereas server_order thread is consuming the food orders.
     Use Queue class implemented in a video tutorial.
 
+Solution:
+```py
+import time
+import threading
+from collections import deque
+
+class Queue:
+    
+    def __init__(self):
+        self.buffer = deque()
+    
+    def enqueue(self, val):
+        self.buffer.appendleft(val)
+        
+    def dequeue(self):
+        return self.buffer.pop()
+    
+    def is_empty(self):
+        return len(self.buffer)==0
+    
+    def size(self):
+        return len(self.buffer)
+
+food_orders = Queue()
+
+def place_order(orders):
+    for i in orders:
+        print(i)
+        food.orders.enqueue(i)
+        time.sleep(0.5)
+
+def serve_order():
+    time.sleep(1)
+    While True:
+        order = food_orders.dequeue(pop)
+        print(order)
+        time.sleep(2)
+
+if __name__ == '__main__':
+    orders = ['pizza','samosa','pasta','biryani','burger']
+    t1 = threading.Thread(target=place_orders, args=(orders,))
+    t2 = threading.Thread(target=serve_orders)
+
+    t1.start()
+    t2.start()
+        
+```
+
 [Solution](https://github.com/codebasics/data-structures-algorithms-python/blob/master/data_structures/6_Queue/Exercise/food_ordering_system.py)
 
 2. Write a program to print binary numbers from 1 to 10 using Queue. Use Queue class implemented in main tutorial.
@@ -34,5 +82,43 @@ Binary sequence should look like,
 Hint: Notice a pattern above. After 1 second and third number is 1+0 and 1+1. 4th and 5th number are second number (i.e. 10) + 0 and second number (i.e. 10) + 1.
 
 You also need to add front() function in queue class that can return the front element in the queue.
+
+Solution
+```py
+from collections import deque
+
+class Queue:
+    
+    def __init__(self):
+        self.buffer = deque()
+    
+    def enqueue(self, val):
+        self.buffer.appendleft(val)
+        
+    def dequeue(self):
+        return self.buffer.pop()
+    
+    def is_empty(self):
+        return len(self.buffer)==0
+    
+    def size(self):
+        return len(self.buffer)
+
+def produce_binary_numbers(n):
+    numbers_queue = Queue()
+    numbers_queue.enqueue("1")
+
+    for i in range(n):
+        front = numbers_queue.front()
+        print("   ", front)
+        numbers_queue.enqueue(front + "0")
+        numbers_queue.enqueue(front + "1")
+
+        numbers_queue.dequeue()
+
+
+if __name__ == '__main__':
+    produce_binary_numbers(10)
+```
 
 [Solution](https://github.com/codebasics/data-structures-algorithms-python/blob/master/data_structures/6_Queue/Exercise/binary_numbers.py)
